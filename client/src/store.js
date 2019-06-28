@@ -1,12 +1,15 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
+import { createIframeClient } from 'remix-plugin';
+
 Vue.use(Vuex);
 
 const serverIP = process.env.VUE_APP_SERVER_IP;
 
 export default new Vuex.Store({
   state: {
+    remixclient: createIframeClient(),
     compiler: {},
     source: '',
     compiled: '',
@@ -24,7 +27,12 @@ export default new Vuex.Store({
       });
     },
     setCompiled({commit}, source) {
-      Vue.axios.post(`${serverIP}/libra/compile`, source).then((response) => {
+      Vue.axios({
+        method: 'POST',
+        headers: { 'content-type': 'text/html' },
+        data: source,
+        url: `${serverIP}/libra/compile?type=m`,
+      }).then((response) => {
         commit('setState', {field: 'compiled', data: response.data});
       });
     },

@@ -20,11 +20,11 @@ export default {
   computed: mapState({
     compiler: state => state.compiler,
     compiled: state => state.compiled,
+    source: state => state.source,
   }),
   methods: {
     onCompile() {
-      const source = '';
-      this.$store.dispatch('setCompiled', source);
+      this.$store.dispatch('setCompiled', this.$store.state.source);
     }
   }
 }

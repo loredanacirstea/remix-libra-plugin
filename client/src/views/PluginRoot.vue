@@ -63,9 +63,30 @@ export default {
     }
   },
   mounted() {
-    this.$store.dispatch('setCompiler');
+    this.setData();
   },
   methods: {
+    async setData() {
+      this.$store.dispatch('setCompiler');
+      await this.$store.state.remixclient.onload();
+      const fileName = await this.$store.state.remixclient.call('fileManager', 'getCurrentFile');
+      this.setSource(fileName);
+      this.listenRemixFile();
+    },
+    listenRemixFile() {
+      this.$store.state.remixclient.on('fileManager', 'currentFileChanged', (fileName) => {
+        console.log('listenRemixFile', fileName);
+        this.setSource(fileName);
+      });
+    },
+    setSource(fileName) {
+      if (fileName) {
+        this.$store.state.remixclient.call('fileManager', 'getFile', fileName)
+          .then((source) => {
+            this.$store.commit('setState', {field: 'source', data: source});
+          });
+      }
+    },
     onSwiperPrev() {
       this.swiper.slidePrev();
       this.currentSlide --;
