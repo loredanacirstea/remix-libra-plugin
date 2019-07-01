@@ -11,6 +11,7 @@ export default new Vuex.Store({
   state: {
     remixclient: createIframeClient(),
     compiler: {},
+    contractName: '',
     source: '',
     compiled: '',
   },
@@ -26,12 +27,12 @@ export default new Vuex.Store({
         commit('setState', {field: 'compiler', data});
       });
     },
-    setCompiled({commit}, source) {
+    setCompiled({state, commit}, type) {
       Vue.axios({
         method: 'POST',
         headers: { 'content-type': 'text/html' },
-        data: source,
-        url: `${serverIP}/libra/compile?type=m`,
+        data: state.source,
+        url: `${serverIP}/libra/compile?type=${type === 'module' ? 'm' : ''}`,
       }).then((response) => {
         commit('setState', {field: 'compiled', data: response.data});
       });

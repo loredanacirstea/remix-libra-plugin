@@ -7,7 +7,7 @@
         <MoveDeploy/>
       </swiper-slide>
 
-      <v-btn
+      <!-- <v-btn
         v-if="currentSlide != 0"
         absolute small top left fab
         color="white"
@@ -26,7 +26,7 @@
         @click="onSwiperNext"
       >
         <v-icon>fa-sitemap</v-icon>
-      </v-btn>
+      </v-btn> -->
   </swiper>
 </template>
 
@@ -81,6 +81,7 @@ export default {
     },
     setSource(fileName) {
       if (fileName) {
+        this.$store.state.contractName = fileName;
         this.$store.state.remixclient.call('fileManager', 'getFile', fileName)
           .then((source) => {
             this.$store.commit('setState', {field: 'source', data: source});
