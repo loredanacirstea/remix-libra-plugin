@@ -1,10 +1,44 @@
 <template>
   <swiper ref="mySwiper" :options="swiperOptions">
       <swiper-slide class="swiper-margin no-swipe">
-        <MoveCompile/>
+        <v-container class="nopadd">
+          <v-layout row wrap>
+            <v-flex xs12 class="text-xs-right">
+              <v-btn
+                flat
+                class="nav next body-2"
+                slot="button-next"
+                @click="onSwiperNext"
+              >
+                <v-icon small>fa-chevron-right</v-icon>
+                <span class="text-none" style="padding-left:6px">Deploy</span>
+              </v-btn>
+            </v-flex>
+            <v-flex xs12>
+              <MoveCompile/>
+            </v-flex>
+          </v-layout>
+        </v-container>
       </swiper-slide>
       <swiper-slide class="swiper-margin no-swipe">
-        <MoveDeploy/>
+        <v-container class="nopadd">
+          <v-layout row wrap>
+            <v-flex xs12 class="text-xs-left">
+              <v-btn
+                flat
+                class="nav prev body-2"
+                slot="button-prev"
+                @click="onSwiperPrev"
+              >
+                <v-icon small>fa-chevron-left</v-icon>
+                <span class="text-none" style="padding-left:6px">Compile</span>
+              </v-btn>
+            </v-flex>
+            <v-flex xs12>
+              <MoveDeploy/>
+            </v-flex>
+          </v-layout>
+        </v-container>
       </swiper-slide>
 
       <!-- <v-btn
@@ -32,6 +66,7 @@
 
 <script>
 import Vue from 'vue';
+import { mapState } from 'vuex';
 import VueAwesomeSwiper from 'vue-awesome-swiper';
 import 'swiper/dist/css/swiper.css';
 
@@ -57,11 +92,12 @@ export default {
       currentSlide: 0,
     }
   },
-  computed: {
+  computed: mapState({
+    compiled: state => state.compiled,
     swiper() {
       return this.$refs.mySwiper.swiper;
     }
-  },
+  }),
   mounted() {
     this.setData();
   },
@@ -115,7 +151,7 @@ export default {
 .fullheight, .v-window, .v-window__container {
     height: 100%;
 }
-.nav{
+/* .nav{
     position:fixed!important;
     top:3px!important;
 }
@@ -124,5 +160,8 @@ export default {
 }
 .nav.next {
     right: 3px!important;
+} */
+.nopadd {
+  padding: 0!important;
 }
 </style>

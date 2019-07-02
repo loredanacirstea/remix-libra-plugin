@@ -1,6 +1,6 @@
 <template>
-  <v-container class="nopadd">
-    <v-layout row wrap class="greyb" style="padding-left: 20px;padding-top: 20px;">
+  <div>
+    <v-layout row wrap align-baseline class="greyb" style="padding-left: 20px;padding-top: 20px;">
       <v-flex xs2>
         <span class="body-2 text-xs-center grey--text font-weight-bold">Compiler:</span>
       </v-flex>
@@ -12,12 +12,12 @@
       </v-flex>
     </v-layout>
     <v-layout row wrap>
-      <v-flex xs12>
+      <v-flex xs10>
         <v-btn
           block dark
           :color="isMove ? '#2F3E4E' : 'grey'"
           class="body-2 font-weight-medium"
-          style="margin-right:10px;margin-left:10px;"
+          style="margin-right:20px;margin-left:20px;"
           @click="onCompile"
         >
           <v-icon small left dark>fa-sync</v-icon>
@@ -60,7 +60,7 @@
         </v-btn>
       </v-flex>
     </v-layout>
-  </v-container>
+  </div>
 </template>
 
 <script>
@@ -113,9 +113,6 @@ export default {
 </script>
 
 <style>
-.nopadd {
-  padding: 0!important;
-}
 .greyb {
   background-color: #EDF0F1;
 }
