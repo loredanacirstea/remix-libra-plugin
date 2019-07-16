@@ -3,7 +3,17 @@
       <swiper-slide class="swiper-margin no-swipe">
         <v-container class="nopadd">
           <v-layout row wrap>
-            <v-flex xs12 class="text-xs-right">
+            <v-flex xs8 class="text-xs-left">
+              <v-btn
+                icon
+                class="nav next body-2"
+                slot="button-next"
+                @click="onGitHub"
+              >
+                <v-icon small>fa-info</v-icon>
+              </v-btn>
+            </v-flex>
+            <v-flex xs4 class="text-xs-right">
               <v-btn
                 flat
                 class="nav next body-2"
@@ -13,6 +23,9 @@
                 <v-icon small>fa-chevron-right</v-icon>
                 <span class="text-none" style="padding-left:6px">Deploy</span>
               </v-btn>
+            </v-flex>
+            <v-flex xs12 v-if="github">
+              <span class="text-none">{{github}}</span>
             </v-flex>
             <v-flex xs12>
               <MoveCompile/>
@@ -90,6 +103,7 @@ export default {
         initialSlide: 0,
       },
       currentSlide: 0,
+      github: null,
     }
   },
   computed: mapState({
@@ -132,6 +146,14 @@ export default {
       this.swiper.slideNext();
       this.currentSlide ++;
     },
+    onGitHub() {
+      if (!this.github) {
+        this.github = 'https://github.com/loredanacirstea/remix-libra-plugin';
+        window.open(this.github, '_blank');
+      } else {
+        this.github = null;
+      }
+    }
   },
 }
 </script>
