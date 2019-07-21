@@ -47,11 +47,38 @@
       <v-flex xs12>
         <v-divider></v-divider>
       </v-flex>
+      <v-flex xs10 v-if="compiled">
+        <v-dialog v-model="compilationDialog" width="500">
+          <template v-slot:activator="{ on }">
+            <v-btn
+              block dark
+              color="#98A4A6"
+              class="body-2 font-weight-medium"
+              style="margin-right:20px;margin-left:20px;"
+              @click="onShowCompiled"
+            >
+              <span class="text-capitalize">Compilation Details</span>
+            </v-btn>
+          </template>
+          <v-card>
+            <v-card-title
+              class="body-2 grey lighten-2"
+              primary-title
+            >
+              <v-flex xs6>{{contractName}}</v-flex>
+              <v-flex xs6 text-xs-right><v-spacer></v-spacer><v-icon small @click="compilationDialog = false">fa-times</v-icon></v-flex>
+            </v-card-title>
+            <v-card-text>
+              <CompilationDetails :compiled="compiled"/>
+            </v-card-text>
+          </v-card>
+        </v-dialog>
+      </v-flex>
       <v-flex xs10>
         <v-btn
           v-if="compiled"
           flat
-          class="body-2"
+          class="body-2 font-weight-regular"
           style="margin-right:10px;margin-left:10px;"
           @click="clipboardCopy(compiled)"
         >
@@ -65,8 +92,10 @@
 
 <script>
 import { mapState } from 'vuex';
+import CompilationDetails from './CompilationDetails';
 
 export default {
+  components: {CompilationDetails},
   data () {
     return {
       scriptType: true,
@@ -74,6 +103,7 @@ export default {
       typeRadio: 'module',
       compilerSelect: null,
       isMove: true,
+      compilationDialog: false,
     }
   },
   computed: mapState({
@@ -108,6 +138,9 @@ export default {
       }
       document.body.removeChild(textArea);
     },
+    onShowCompiled() {
+      this.compilationDialog = true;
+    }
   },
 }
 </script>
