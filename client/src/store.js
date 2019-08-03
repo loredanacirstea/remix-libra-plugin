@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
-import { createIframeClient } from 'remix-plugin';
+import {createIframeClient} from '@remixproject/plugin';
 
 Vue.use(Vuex);
 
