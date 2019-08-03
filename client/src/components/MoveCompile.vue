@@ -47,7 +47,7 @@
       <v-flex xs12>
         <v-divider></v-divider>
       </v-flex>
-      <v-flex xs10 v-if="compiled">
+      <v-flex xs11 v-if="compiled">
         <v-dialog v-model="compilationDialog" width="500">
           <template v-slot:activator="{ on }">
             <v-btn
