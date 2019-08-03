@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <v-flex xs12>
     <v-layout row wrap align-baseline class="greyb" style="padding-left: 20px;padding-top: 20px;">
       <v-flex xs2>
         <span class="body-2 text-xs-center grey--text font-weight-bold">Compiler:</span>
@@ -12,7 +12,7 @@
       </v-flex>
     </v-layout>
     <v-layout row wrap>
-      <v-flex xs10>
+      <v-flex xs11>
         <v-btn
           block dark
           :color="isMove ? '#2F3E4E' : 'grey'"
@@ -87,7 +87,7 @@
         </v-btn>
       </v-flex>
     </v-layout>
-  </div>
+  </v-flex>
 </template>
 
 <script>

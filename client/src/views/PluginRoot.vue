@@ -33,7 +33,7 @@
           </v-layout>
         </v-container>
       </swiper-slide>
-      <swiper-slide class="swiper-margin no-swipe">
+      <swiper-slide class="swiper-margin no-swipe" style="margin-left: 25px;">
         <v-container class="nopadd">
           <v-layout row wrap>
             <v-flex xs12 class="text-xs-left">
@@ -161,6 +161,7 @@ export default {
 <style>
 .swiper-margin {
     margin: 0;
+    padding: 10px!important;
 }
 .swiper-container {
     height: 100%;
