@@ -3,14 +3,12 @@ const exec = require('child_process').exec;
 const bodyParser = require('body-parser');
 const express = require('express');
 var cors = require('cors');
+const SERVER_CONFIG = require('./config.js');
 const app = express();
-const port = 3000;
 
 const compilerPath = '../../libra/target/debug/compiler';
 
-app.use(cors({
-  origin: '*',
-}));
+app.use(cors(SERVER_CONFIG.cors));
 app.use(express.static('public'));
 app.use(bodyParser.text({ type: 'text/html'}));
 
@@ -33,9 +31,9 @@ app.post('/libra/compile', function (req, res) {
           if (err) throw err;
           console.log(`${fileName} was deleted`);
         });
-        res.send(compiled);
+        res.send(compiled || stderr);
       });
   });
 })
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+app.listen(SERVER_CONFIG.port, () => console.log(`Example app listening on port ${SERVER_CONFIG.port}!`));
