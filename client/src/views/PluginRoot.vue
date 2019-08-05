@@ -119,14 +119,18 @@ export default {
     async setData() {
       this.$store.dispatch('setCompiler');
       await this.$store.state.remixclient.onload();
-      const fileName = await this.$store.state.remixclient.call('fileManager', 'getCurrentFile');
-      this.setSource(fileName);
-      this.listenRemixFile();
+      this.setRemixFile();
     },
-    listenRemixFile() {
+    setRemixFile() {
       this.$store.state.remixclient.on('fileManager', 'currentFileChanged', (fileName) => {
-        console.log('listenRemixFile', fileName);
         this.setSource(fileName);
+      });
+
+      this.$store.state.remixclient.call('fileManager', 'getCurrentFile').then((fileName) => {
+        this.setSource(fileName);
+      }).catch((error) => {
+        console.log(error);
+        // TODO notification
       });
     },
     setSource(fileName) {
