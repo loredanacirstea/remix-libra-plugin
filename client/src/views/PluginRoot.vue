@@ -48,6 +48,11 @@
               </v-btn>
             </v-flex>
             <v-flex xs12>
+              <p>
+                Deployment will be available after <a href="https://github.com/libra/libra/issues/142" target="_blank">https://github.com/libra/libra/issues/142</a> is solved.
+              </p>
+            </v-flex>
+            <v-flex xs12>
               <MoveDeploy/>
             </v-flex>
           </v-layout>

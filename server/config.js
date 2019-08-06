@@ -4,7 +4,7 @@ module.exports = {
     port: 3000,
     cors: {
       origin: '*',
-      methods: 'GET',
+      methods: 'GET,POST',
     },
   },
   COMPILER_PATH: '../../libra/target/debug/compiler',
